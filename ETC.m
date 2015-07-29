@@ -1,8 +1,8 @@
-function [RMSE_ETC, rho_ETC] = ETC(y)
+function [MSE_ETC, rho2_ETC] = ETC(y)
 % ETC.m
 %
 % Extended Triple Collocation (ETC) is a technique for estimating the
-% root-mean-squared errors (RMSE) and correlation coefficients (rho) of three
+% mean-squared errors (MSE) and correlation coefficients (rho) of three
 % measurement systems (e.g., satellite, in-situ and model-based products)
 % with respect to the unknown true value of the variable being measured 
 % (e.g., soil moisture, wind speed).
@@ -13,11 +13,11 @@ function [RMSE_ETC, rho_ETC] = ETC(y)
 % must be the same for each measurement system. All NaNs must be removed.
 %
 % OUTPUTS
-% RMSE_ETC: a 3 x 1 vector of RMSEs of each of the measurement systems with
+% MSE_ETC: a 3 x 1 vector of MSEs of each of the measurement systems with
 % respect to the uknown true value of the variable being measured. The ith
 % row corresponds to the measurement system with observations in the ith
 % column of y.
-% rho_ETC: a 3 x 1 vector of correlation coefficients.
+% rho2_ETC: a 3 x 1 vector of squared correlation coefficients.
 % 
 % REFERENCE
 % For more details on ETC, see:
@@ -60,19 +60,20 @@ function [RMSE_ETC, rho_ETC] = ETC(y)
         sign(Q_hat(1,3)*Q_hat(2,3))*sqrt(Q_hat(1,2)*Q_hat(2,3)/Q_hat(2,2)/Q_hat(1,3)); ...
         sign(Q_hat(1,2)*Q_hat(2,3))*sqrt(Q_hat(1,3)*Q_hat(2,3)/Q_hat(3,3)/Q_hat(1,2))];
 
+    rho2_ETC = rho_ETC.^2;
+    
     MSE_ETC = [(Q_hat(1,1) - Q_hat(1,2)*Q_hat(1,3)/Q_hat(2,3)); ...
         (Q_hat(2,2) - Q_hat(1,2)*Q_hat(2,3)/Q_hat(1,3)); ...
         (Q_hat(3,3) - Q_hat(1,3)*Q_hat(2,3)/Q_hat(1,2))];
 
-    RMSE_ETC = sqrt(MSE_ETC);
     
     % If MSEs are negative, display a warning.
-    if any(~isreal(RMSE_ETC))
-        warning('Warning: at least one calculated RMSE is a complex number. This can happen if the sample size is too small, or if one of the assumptions of ETC is violated.');
+    if any(MSE_ETC<0)
+        warning('Warning: at least one calculated MSE is negative. This can happen if the sample size is too small, or if one of the assumptions of ETC is violated.');
     end
     % If correlation coefficients are complex, display a warning. 
-    if any(~isreal(rho_ETC))
-        warning('Warning: at least one calculated correlation coefficient is a complex number. This can happen if the sample size is too small, or if one of the assumptions of ETC is violated.');
+    if any(rho2_ETC<0)
+        warning('Warning: at least one calculated squared correlation coefficient is negative. This can happen if the sample size is too small, or if one of the assumptions of ETC is violated.');
     end
     
 end

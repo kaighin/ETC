@@ -6,7 +6,7 @@ Extended Triple Collocation (ETC) is a technique for estimating the root-mean-sq
 ETC.m is a Matlab function for implementing ETC.
 
 ## FAQ
-### Why am I getting complex values for the estimated RMSEs and correlation coefficients?
+### Why am I getting negative values for the estimated MSEs and squared correlation coefficients?
 This can happen if your sample size is too small, causing the estimated covariance matrix Q_hat to be too noisy. It can also occur if one of the assumptions of ETC is violated (e.g., linear relationship between the measurement and true value, uncorrelated errors between measurements and with the truth).
 
 
