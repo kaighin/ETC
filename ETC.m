@@ -71,7 +71,7 @@ function [MSE_ETC, rho2_ETC] = ETC(y)
     if any(MSE_ETC<0)
         warning('Warning: at least one calculated MSE is negative. This can happen if the sample size is too small, or if one of the assumptions of ETC is violated.');
     end
-    % If correlation coefficients are complex, display a warning. 
+    % If squared correlation coefficients are negative, display a warning. 
     if any(rho2_ETC<0)
         warning('Warning: at least one calculated squared correlation coefficient is negative. This can happen if the sample size is too small, or if one of the assumptions of ETC is violated.');
     end
