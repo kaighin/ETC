@@ -12,7 +12,7 @@ There is no requirement to do this. ETC works fine on both absolute values or cl
 ### Do I need to rescale my data to a reference before applying ETC?
 While some studies rescale each measurement system to a "reference" system, there is no need to do this; in fact, it biases the error estimates and should be avoided (see Yilmaz & Crow, 2013 for more on this: http://journals.ametsoc.org/doi/abs/10.1175/JHM-D-12-052.1). You should just apply ETC directly to the data without rescaling.
 
-### Why am I getting negative values for the estimated MSEs and squared correlation coefficients?
+### Why am I getting negative values for the estimated errVars and squared correlation coefficients?
 This can happen if your sample size is too small, causing the estimated covariance matrix Q_hat to be too noisy. It can also occur if one of the assumptions of ETC is violated (e.g., linear relationship between the measurement and true value, uncorrelated errors between measurements and with the truth).
 
 
