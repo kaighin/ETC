@@ -1,8 +1,8 @@
-function [MSE_ETC, rho2_ETC] = ETC(y)
+function [errVar_ETC, rho2_ETC] = ETC(y)
 % ETC.m
 %
 % Extended Triple Collocation (ETC) is a technique for estimating the
-% mean-squared errors (MSE) and correlation coefficients (rho) of three
+% variance of the noise error (errVar) and correlation coefficients (rho) of three
 % measurement systems (e.g., satellite, in-situ and model-based products)
 % with respect to the unknown true value of the variable being measured 
 % (e.g., soil moisture, wind speed).
@@ -13,7 +13,7 @@ function [MSE_ETC, rho2_ETC] = ETC(y)
 % must be the same for each measurement system. All NaNs must be removed.
 %
 % OUTPUTS
-% MSE_ETC: a 3 x 1 vector of MSEs of each of the measurement systems with
+% errVar_ETC: a 3 x 1 vector of errVars of each of the measurement systems with
 % respect to the uknown true value of the variable being measured. The ith
 % row corresponds to the measurement system with observations in the ith
 % column of y.
@@ -62,14 +62,14 @@ function [MSE_ETC, rho2_ETC] = ETC(y)
 
     rho2_ETC = rho_ETC.^2;
     
-    MSE_ETC = [(Q_hat(1,1) - Q_hat(1,2)*Q_hat(1,3)/Q_hat(2,3)); ...
+    errVar_ETC = [(Q_hat(1,1) - Q_hat(1,2)*Q_hat(1,3)/Q_hat(2,3)); ...
         (Q_hat(2,2) - Q_hat(1,2)*Q_hat(2,3)/Q_hat(1,3)); ...
         (Q_hat(3,3) - Q_hat(1,3)*Q_hat(2,3)/Q_hat(1,2))];
 
     
-    % If MSEs are negative, display a warning.
-    if any(MSE_ETC<0)
-        warning('Warning: at least one calculated MSE is negative. This can happen if the sample size is too small, or if one of the assumptions of ETC is violated.');
+    % If errVars are negative, display a warning.
+    if any(errVar_ETC<0)
+        warning('Warning: at least one calculated errVar is negative. This can happen if the sample size is too small, or if one of the assumptions of ETC is violated.');
     end
     % If squared correlation coefficients are negative, display a warning. 
     if any(rho2_ETC<0)

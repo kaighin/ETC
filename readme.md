@@ -1,7 +1,7 @@
 Extended Triple Collocation (ETC)
 =================================
 
-Extended Triple Collocation (ETC) is a technique for estimating the mean-squared-errors (MSE) and correlation coefficients (rho) of three measurement systems (e.g., satellite, in-situ and model-based products) with respect to the unknown true value of the variable being measured (e.g., soil moisture, wind speed). See McColl et al. (2014) for more details (full reference below).
+Extended Triple Collocation (ETC) is a technique for estimating the variance of the noise error (errVar) and correlation coefficients (rho) of three measurement systems (e.g., satellite, in-situ and model-based products) with respect to the unknown true value of the variable being measured (e.g., soil moisture, wind speed). See McColl et al. (2014) for more details (full reference below).
 
 ETC.m is a Matlab function for implementing ETC.
 
