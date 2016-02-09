@@ -9,6 +9,7 @@ ETC.m is a Matlab function for implementing ETC.
 ### Do I need to apply ETC to anomalies?
 There is no requirement to do this. ETC works fine on both absolute values or climatological anomalies. However, there is some evidence to suggest that for the specific case of soil moisture, anomalies may better satisfy the assumptions of triple collocation (Miralles et al. 2010; Draper et al. 2013)
 >Miralles, Diego G., Wade T. Crow, and Michael H. Cosh (2010). Estimating Spatial Sampling Errors in Coarse-Scale Soil Moisture Estimates Derived from Point-Scale Observations. Journal of Hydrometeorology 11, no. 6
+
 >Draper, Clara, Rolf Reichle, Richard de Jeu, Vahid Naeimi, Robert Parinussa, and Wolfgang Wagner (2013). Estimating Root Mean Square Errors in Remotely Sensed Soil Moisture over Continental Scale Domains. Remote Sensing of Environment 137
 
 ### Do I need to rescale my data to a reference before applying ETC?
